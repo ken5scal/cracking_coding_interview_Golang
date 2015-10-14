@@ -53,10 +53,11 @@ func (l *List) Find(name string) *Node {
 		if n.Person.Name == name {
 			found = true
 			result = n
-			break
+			fmt.Printf("Found : %v\n", name)
+			return result
 		}
 	}
-
+	fmt.Printf("Not Found : %v\n", name)
 	return result
 }
 
@@ -70,12 +71,21 @@ func (l *List) Delete(name string) bool {
 		next_node := node2del.next
 
 		if prev_node != nil { // Not the First Node
-			prev_node.next = node2del.Next()
+			prev_node.next = next_node
+		} else {
+			l.head = next_node
 		}
 		if next_node != nil { // Not the Last Node
-			next_node.prev = node2del.prev
+			next_node.prev = prev_node
+		} else {
+			l.tail = prev_node
 		}
 		success = true
+	}
+	if success {
+		fmt.Printf("Removed: %v\n", name)
+	} else {
+		fmt.Printf("Failed Removing: %v\n", name)
 	}
 	return success
 }
@@ -120,7 +130,7 @@ func main() {
 	for n := mfList.First(); n != nil; n = n.Next() {
 		fmt.Printf("%v", n.Name)
 		if processed[n] {
-			fmt.Println("has benn processed")
+			fmt.Println(" has benn processed")
 		} else {
 			fmt.Println()
 		}
@@ -128,34 +138,20 @@ func main() {
 	}
 
 	fmt.Println(dashes)
-	var found_node *Node
+	// var found_node *Node
 	name_to_find := "Kengo"
-	found_node = mfList.Find(name_to_find)
-	if found_node == nil {
-		fmt.Println("Not Found : %v\n", name_to_find)
-	} else {
-		fmt.Printf("Found: %v\n", name_to_find)
-	}
+	mfList.Find(name_to_find)
 	// Not in the List
 	name_to_find = "Tsuji"
-	found_node = mfList.Find(name_to_find)
-	if found_node == nil {
-		fmt.Printf("Not Found : %v\n", name_to_find)
-	} else {
-		fmt.Printf("Found: %v\n", name_to_find)
-	}
+	mfList.Find(name_to_find)
 
 	fmt.Println(dashes)
 	name_to_remove := "Kengo"
-	isSuccessfullyRemoved := mfList.Delete(name_to_remove)
-	if isSuccessfullyRemoved {
-		fmt.Printf("Removed: %v\n", name_to_remove)
-	} else {
-		fmt.Printf("Failed: %v\n", name_to_remove)
-	}
+	mfList.Delete(name_to_remove)
+	mfList.Delete(name_to_remove)
 
 	fmt.Println(dashes)
-	fmt.Println("*Pop each value oof list...")
+	fmt.Println("*Pop each value in the list...")
 	for person, err := mfList.Pop(); err == nil; person, err = mfList.Pop() {
 		fmt.Printf("%v\n", person)
 	}
