@@ -69,8 +69,12 @@ func (l *List) Delete(name string) bool {
 		prev_node := node2del.prev
 		next_node := node2del.next
 
-		prev_node.next = node2del.next
-		next_node.prev = node2del.prev
+		if prev_node != nil { // Not the First Node
+			prev_node.next = node2del.Next()
+		}
+		if next_node != nil { // Not the Last Node
+			next_node.prev = node2del.prev
+		}
 		success = true
 	}
 	return success
@@ -95,15 +99,15 @@ func (l *List) Pop() (p Person, err error) {
 func main() {
 	dashes := strings.Repeat("-", 50)
 
-	l := new(List)
-	l.Push(Person{Name: "Kengo", Age: 27})
-	l.Push(Person{Name: "Ichikawa", Age: 33})
-	l.Push(Person{Name: "Asano", Age: 35})
+	mfList := new(List)
+	mfList.Push(Person{Name: "Kengo", Age: 27})
+	mfList.Push(Person{Name: "Ichikawa", Age: 33})
+	mfList.Push(Person{Name: "Asano", Age: 35})
 
 	processed := make(map[*Node]bool)
 
 	fmt.Println("First time through list...")
-	for n := l.First(); n != nil; n = n.Next() {
+	for n := mfList.First(); n != nil; n = n.Next() {
 		fmt.Printf("%s\n", n.Name)
 		if processed[n] {
 			fmt.Printf("%s as been processed\n", n.Name)
@@ -113,7 +117,7 @@ func main() {
 
 	fmt.Println(dashes)
 	fmt.Println("Second time through list...")
-	for n := l.First(); n != nil; n = n.Next() {
+	for n := mfList.First(); n != nil; n = n.Next() {
 		fmt.Printf("%v", n.Name)
 		if processed[n] {
 			fmt.Println("has benn processed")
@@ -126,7 +130,7 @@ func main() {
 	fmt.Println(dashes)
 	var found_node *Node
 	name_to_find := "Kengo"
-	found_node = l.Find(name_to_find)
+	found_node = mfList.Find(name_to_find)
 	if found_node == nil {
 		fmt.Println("Not Found : %v\n", name_to_find)
 	} else {
@@ -134,11 +138,26 @@ func main() {
 	}
 	// Not in the List
 	name_to_find = "Tsuji"
-	found_node = l.Find(name_to_find)
+	found_node = mfList.Find(name_to_find)
 	if found_node == nil {
-		fmt.Println("Not Found : %v\n", name_to_find)
+		fmt.Printf("Not Found : %v\n", name_to_find)
 	} else {
 		fmt.Printf("Found: %v\n", name_to_find)
 	}
 
+	fmt.Println(dashes)
+	name_to_remove := "Kengo"
+	isSuccessfullyRemoved := mfList.Delete(name_to_remove)
+	if isSuccessfullyRemoved {
+		fmt.Printf("Removed: %v\n", name_to_remove)
+	} else {
+		fmt.Printf("Failed: %v\n", name_to_remove)
+	}
+
+	fmt.Println(dashes)
+	fmt.Println("*Pop each value oof list...")
+	for person, err := mfList.Pop(); err == nil; person, err = mfList.Pop() {
+		fmt.Printf("%v\n", person)
+	}
+	//fmt.Println(mfList.Pop())
 }
