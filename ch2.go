@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	list "github.com/ken5scal/linkedList"
+	list "github.com/ken5scal/linked_list"
 )
 
 func doublyLinkedListTest() {
@@ -116,7 +116,19 @@ func singlyLinkedListTest() {
 	fmt.Println(mfList.Pop()) //
 }
 
+func singlyLinkedListReverseTest() {
+	mfList := new(list.SinglyLinkedList)
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	mfList.Push(list.Person{Name: "Ichikawa", Age: 33})
+	mfList.Push(list.Person{Name: "Asano", Age: 35})
+	mfList.Reverse()
+	fmt.Println(mfList.First().Name)
+	fmt.Println(mfList.First().Next().Name)
+	fmt.Println(mfList.First().Next().Next().Name)
+}
+
 func main() {
-	doublyLinkedListTest()
-	singlyLinkedListTest()
+	//doublyLinkedListTest()
+	//singlyLinkedListTest()
+	singlyLinkedListReverseTest()
 }
