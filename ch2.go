@@ -139,10 +139,25 @@ func singlyLinkedListReverseTest() {
 	fmt.Println(mfList.First().Next().Next().Name)
 }
 
+func singlyLinkedListRemoveDuplicatesTest() {
+	mfList := new(list.SinglyLinkedList)
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	mfList.Push(list.Person{Name: "Ichikawa", Age: 33})
+	mfList.Push(list.Person{Name: "Asano", Age: 35})
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	mfList.RemoveDuplicates()
+
+	for n := mfList.First(); n != nil; n = n.Next() {
+		fmt.Printf("%s\n", n.Name)
+	}
+}
+
 func main() {
 	//doublyLinkedListTest()
 	//singlyLinkedListTest()
 	dashes := strings.Repeat("-", 20)
 	fmt.Println(dashes + " Reversing Linked List " + dashes)
 	singlyLinkedListReverseTest()
+	fmt.Println(dashes + " Remove Duplicates in Linked List " + dashes)
+	singlyLinkedListRemoveDuplicatesTest()
 }
