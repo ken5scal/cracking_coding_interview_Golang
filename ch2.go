@@ -7,6 +7,18 @@ import (
 	list "github.com/ken5scal/linked_list"
 )
 
+func problem1() {
+	fmt.Printf("Problem 2.1\n")
+	dashes := strings.Repeat("-", 50)
+	fmt.Println(dashes)
+	mfList := new(list.DoublyLinkedList)
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	mfList.Push(list.Person{Name: "Ichikawa", Age: 33})
+	mfList.Push(list.Person{Name: "Asano", Age: 35})
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	fmt.Println(dashes)
+}
+
 func doublyLinkedListTest() {
 	dashes := strings.Repeat("-", 50)
 
@@ -130,5 +142,7 @@ func singlyLinkedListReverseTest() {
 func main() {
 	//doublyLinkedListTest()
 	//singlyLinkedListTest()
+	dashes := strings.Repeat("-", 20)
+	fmt.Println(dashes + " Reversing Linked List " + dashes)
 	singlyLinkedListReverseTest()
 }
