@@ -152,6 +152,27 @@ func singlyLinkedListRemoveDuplicatesTest() {
 	}
 }
 
+var Kengo = &list.Person{Name: "Kengo", Age: 27}
+var Ichikawa = &list.Person{Name: "Ichikawa", Age: 33}
+var Asano = &list.Person{Name: "Asano", Age: 35}
+var Tsuji = &list.Person{Name: "Tsuji", Age: 40}
+var Tsuzuki = &list.Person{Name: "Tsuzuki", Age: 42}
+
+func SinglyLinkedListFindInReverseOrder(idx int) {
+	mfList := new(list.SinglyLinkedList)
+	//	mfList.Push(Kengo)
+	//	mfList.Push(Ichikawa)
+	//	mfList.Push(Asano)
+	//	mfList.Push(Tsuji)
+	//	mfLIst.Push(Tsuzuki)
+	mfList.Push(list.Person{Name: "Kengo", Age: 27})
+	mfList.Push(list.Person{Name: "Ichikawa", Age: 33})
+	mfList.Push(list.Person{Name: "Asano", Age: 35})
+	mfList.Push(list.Person{Name: "Tsuji", Age: 40})
+	mfList.Push(list.Person{Name: "Tsuzuki", Age: 42})
+	fmt.Println(mfList.FindInReverseOrder(idx).Name)
+}
+
 func main() {
 	//doublyLinkedListTest()
 	//singlyLinkedListTest()
@@ -160,4 +181,6 @@ func main() {
 	singlyLinkedListReverseTest()
 	fmt.Println(dashes + " Remove Duplicates in Linked List " + dashes)
 	singlyLinkedListRemoveDuplicatesTest()
+	fmt.Println(dashes + " Find specified index in reverse order " + dashes)
+	SinglyLinkedListFindInReverseOrder(0)
 }
