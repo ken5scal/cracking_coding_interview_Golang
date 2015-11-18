@@ -184,6 +184,22 @@ func SinglyLinkedListDeleteNonHead() {
 	}
 }
 
+func SinglyLinkedListAddNumbers() {
+	list1 := new(list.SinglyLinkedListNumber)
+	list1.PushNumber(7)
+	list1.PushNumber(1)
+	list1.PushNumber(5)
+	list2 := new(list.SinglyLinkedListNumber)
+	list2.PushNumber(5)
+	list2.PushNumber(9)
+	list2.PushNumber(2)
+
+	list3 := list.AddNumList(list1, list2)
+	for node := list3.First(); node != nil; node = node.Next {
+		fmt.Printf("%d", node.Value)
+	}
+}
+
 func main() {
 	//doublyLinkedListTest()
 	//singlyLinkedListTest()
@@ -194,6 +210,8 @@ func main() {
 	singlyLinkedListRemoveDuplicatesTest()
 	fmt.Println(dashes + " Find specified index in reverse order " + dashes)
 	SinglyLinkedListFindInReverseOrder(0)
-	fmt.Println(dashes + " Remove Non Head Node in SinglyLinkedList" + dashes)
+	fmt.Println(dashes + " Remove non-head Node in SinglyLinkedList " + dashes)
 	SinglyLinkedListDeleteNonHead()
+	fmt.Println(dashes + " Add Lists " + dashes)
+	SinglyLinkedListAddNumbers()
 }
